@@ -100,7 +100,8 @@ beholden to how the definition is introduced in the skeleton code
 below. (We'll stop mentioning this now.) *)
 
 let gensym (s : string) : string =
-  failwith "gensym not implemented" ;;
+  s ^ (string_of_int (inc ())) ;;
+
 
 (*====================================================================
 Part 3: Appending mutable lists
