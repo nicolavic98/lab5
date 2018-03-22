@@ -129,8 +129,10 @@ list to a mutable list, with behavior like this:
       Cons (1, {contents = Cons (2, {contents = Cons (3, {contents = Nil})})})
  *)
 
-let mlist_of_list (lst : 'a list) : 'a mlist =
-  failwith "mlist_of_list not implemented" ;;
+let rec mlist_of_list (lst : 'a list) : 'a mlist =
+  match lst with
+  | [] -> Nil
+  | h::t -> Cons (h, ref (mlist_of_list t)) ;;
 
 (* Define a function length to compute the length of an mlist. Try to
 do this without looking at the solution that is given in the lecture
@@ -143,7 +145,9 @@ slides.
  *)
 
 let length (m : 'a mlist) : int =
-  failwith "length not implemented" ;;
+  match m with
+  | Nil -> 0
+  | Cons (x, y) -> length !y + 1;;
 
 (* What is the time complexity of the length function in O() notation
 in terms of the length of its list argument? *)
