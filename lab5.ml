@@ -144,7 +144,7 @@ slides.
     - : int = 4
  *)
 
-let length (m : 'a mlist) : int =
+let rec length (m : 'a mlist) : int =
   match m with
   | Nil -> 0
   | Cons (x, y) -> length !y + 1;;
