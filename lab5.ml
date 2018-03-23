@@ -103,6 +103,13 @@ let gensym (s : string) : string =
   s ^ (string_of_int (inc ())) ;;
 
 
+  (* lab example *
+  let gensym (s : string) : string =
+    let inc = ref 0 in
+    fun s -> let v = s ^  string_of_int (!inc) in
+      inc := !inc *)
+
+
 (*====================================================================
 Part 3: Appending mutable lists
 
@@ -218,8 +225,14 @@ Example of use:
               {contents = Cons (5, {contents = Cons (6, {contents = Nil})})})})})})
  *)
 
-let mappend _ =
-  failwith "mappend not implemented" ;;
+let rec mappend (xs : 'a mlist)(ys : 'a mlist) : unit =
+  match xs with
+  | Nil -> ()
+  | Cons (_h, t) -> match !t with
+                    | Nil -> t := ys
+                    | Cons (_,_) as m -> mappend m ys;;
+
+                    (* could also do cons match on !t *)
 
 (* What happens when you evaluate the following expressions
 sequentially in order?
